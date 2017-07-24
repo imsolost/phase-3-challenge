@@ -26,7 +26,7 @@ CREATE TABLE orders (
 );
 
 DROP TABLE IF EXISTS orderDetails;
-CREATE TABLE orderDetails (
+CREATE TABLE orderdetails (
   id SERIAL PRIMARY KEY,
   order_id int NOT NULL,
   item_id int NOT NULL,

@@ -12,5 +12,5 @@ VALUES ('shopper1'),
 INSERT INTO orders (shopper_id)
 VALUES (1), (2), (3), (1), (2), (3), (1), (2), (3), (1), (2), (3);
 
-INSERT INTO orderDetails (order_id, item_id)
+INSERT INTO orderdetails (order_id, item_id)
 VALUES (1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 2), (3, 3), (3, 4), (4, 7), (5, 8), (6, 9), (7, 7), (8, 8), (9, 9), (10,10);

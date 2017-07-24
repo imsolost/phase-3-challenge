@@ -9,10 +9,11 @@ exports.queries = {
 
   cheapItems: () => db.any('SELECT id, name, price FROM items WHERE price < 10 ORDER BY price ASC', []),
 
-  countItemsInSection: section => db.any('SELECT Count (section) FROM items WHERE section = $1', [section]),
+  countItemsInSection: section => db.any('SELECT COUNT (section) FROM items WHERE section = $1', [section]),
 
   mostRecentOrders(): () => db.any('SELECT id, order_date FROM orders ORDER BY id DESC LIMIT 10'),
 
   lastShopperName(): () => db.one('SELECT name from shoppers WHERE id = (SELECT shopper_id FROM orders ORDER BY id DESC LIMIT 1)'),
 
+  orderTotal(): (id) => db.any('SELECT SUM (items.price) from orderdetails INNER JOIN items ON orderdetails.item_id=items.id WHERE order_id = $1')
 }
