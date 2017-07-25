@@ -6,7 +6,7 @@ addToCart = (event) => {
   const item = event.target.parentNode.innerText.split('\n')
   cart.push({ item: item[0], price: Number( item[1].slice(1) ) })
 
-  itemslist.appendChild( document.createElement('div') ).className = "cart-row row"
+  itemslist.appendChild( document.createElement('div') ).className = "cart-row flex flex-row-between"
   const cartrows = document.querySelectorAll('.cart-row')
   const lastrow = cartrows[cartrows.length -1]
 
@@ -25,9 +25,17 @@ sumPrice = (array) => {
 }
 
 cartCount = () => {
-    document.querySelector('.cart-item-count').innerText = `(${cart.length})`
+  document.querySelector('.cart-item-count').innerText = `(${cart.length})`
 
-    // document.querySelector('.cart-total').innerText = 'Total: $' + sumPrice(cart)
+  document.querySelector('.cart-total').innerText = 'Total: $' + sumPrice(cart)
+}
+
+clearCart = () => {
+  while (itemslist.firstChild) {
+    itemslist.removeChild(itemslist.firstChild)
+  }
+  cart = []
+  cartCount()
 }
 
 toggleCart = () => {

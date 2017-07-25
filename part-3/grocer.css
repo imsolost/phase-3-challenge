@@ -114,6 +114,10 @@ body {
   flex: 0;
 }
 
+.cart-row{
+  padding: 0em 1em;
+}
+
 .modal{
   position: fixed;
   left: 25vw;
