@@ -2,8 +2,10 @@ const pgp = require('pg-promise')()
 const connectionString = `pg://${process.env.USER}@localhost:5432/grocery_store`
 const db = pgp( connectionString )
 
-exports.queries = {
-  allItems: () => db.any('SELECT * FROM items', []),
+const queries = {
+  allItems: () => db.any('SELECT * FROM items').then( data => {
+    return data
+  }),
 
   itemsInSection: section => db.any('SELECT id, name FROM items WHERE section = $1', [section]),
 
@@ -11,9 +13,15 @@ exports.queries = {
 
   countItemsInSection: section => db.any('SELECT COUNT (section) FROM items WHERE section = $1', [section]),
 
-  mostRecentOrders(): () => db.any('SELECT id, order_date FROM orders ORDER BY id DESC LIMIT 10'),
+  mostRecentOrders: () => db.any('SELECT id, order_date FROM orders ORDER BY id DESC LIMIT 10'),
 
-  lastShopperName(): () => db.one('SELECT name from shoppers WHERE id = (SELECT shopper_id FROM orders ORDER BY id DESC LIMIT 1)'),
+  lastShopperName: () => db.one('SELECT name from shoppers WHERE id = (SELECT shopper_id FROM orders ORDER BY id DESC LIMIT 1)'),
 
-  orderTotal(): (id) => db.any('SELECT SUM (items.price) from orderdetails INNER JOIN items ON orderdetails.item_id=items.id WHERE order_id = $1')
+  orderTotal: (id) => db.any('SELECT SUM (items.price) from orderdetails INNER JOIN items ON orderdetails.item_id=items.id WHERE order_id = $1')
 }
+module.exports = queries
+
+// queries.allItems().then( data => {
+//   console.log(data)
+//   pgp.end()
+// })

@@ -4,15 +4,17 @@
   "description": "",
   "main": "database.js",
   "scripts": {
-    "create-db": "psql < schema.sql",
+    "schema": "psql < schema.sql",
     "load-data": "psql < load-data.sql",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./database_test.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chai": "^4.1.0",
-    "mocha": "^3.4.2",
     "pg-promise": "^6.3.5"
+  },
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2"
   }
 }
