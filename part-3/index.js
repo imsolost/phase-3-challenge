@@ -1,4 +1,4 @@
-const cart = []
+let cart = []
 const modal = document.querySelector('.modal')
 const itemslist = document.querySelector('.items-list')
 
@@ -47,3 +47,4 @@ toggleCart = () => {
 
 document.querySelectorAll('.add-to-cart').forEach( element => element.addEventListener('click', addToCart) )
 document.querySelectorAll('.cart-button').forEach( element => element.addEventListener('click', toggleCart) )
+document.querySelector('.clear-cart').addEventListener('click', clearCart)
