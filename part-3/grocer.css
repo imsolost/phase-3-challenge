@@ -119,12 +119,13 @@ body {
 }
 
 .modal{
-  position: fixed;
+  position: absolute;
   left: 25vw;
   top: 25vh;
-  z-index: 5;
+  z-index: 1;
   background-color: grey;
   width: 50vw;
   min-height: 50vh;
   display: none;
+  overflow: auto;
 }
