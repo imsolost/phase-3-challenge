@@ -21,22 +21,28 @@ describe('queries', function(){
           expect(data[0].name).to.eql('Flour')
           expect(data[1].name).to.eql('Pasta')
           expect(data[2].name).to.eql('Rice')
-          pgp.end()
       })
     })
   })
 
   describe('cheapItems', () => {
     it('retreives all items less than $10', function() {
-      return queries.itemsInSection()
+      return queries.cheapItems()
         .then( function(data) {
           expect(data).to.be.an('array')
-          expect(data[0].name).to.eql('Flour')
-          expect(data[1].name).to.eql('Pasta')
-          expect(data[2].name).to.eql('Rice')
-          pgp.end()
+          expect(data[0].name).to.eql('Fish')
+          expect(data[data.length - 1].name).to.eql('Honey')
       })
     })
   })
 
+  describe('countItemsInSection', () => {
+    it('retreives number of items in specified section', function() {
+      return queries.countItemsInSection('packaged')
+        .then( function(data) {
+          expect(parseInt(data.count)).to.eql(5)
+          pgp.end()
+      })
+    })
+  })
 })

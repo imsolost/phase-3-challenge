@@ -3,15 +3,13 @@ const connectionString = `pg://${process.env.USER}@localhost:5432/grocery_store`
 const db = pgp( connectionString )
 
 const queries = {
-  allItems: () => db.any('SELECT * FROM items').then( data => {
-    return data
-  }),
+  allItems: () => db.any('SELECT * FROM items'),
 
   itemsInSection: section => db.any('SELECT id, name FROM items WHERE section = $1', [section]),
 
   cheapItems: () => db.any('SELECT id, name, price FROM items WHERE price < 10 ORDER BY price ASC', []),
 
-  countItemsInSection: section => db.any('SELECT COUNT (section) FROM items WHERE section = $1', [section]),
+  countItemsInSection: section => db.one('SELECT COUNT (section) FROM items WHERE section = $1', [section]),
 
   mostRecentOrders: () => db.any('SELECT id, order_date FROM orders ORDER BY id DESC LIMIT 10'),
 
