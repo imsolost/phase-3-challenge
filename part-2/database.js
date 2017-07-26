@@ -13,9 +13,9 @@ const queries = {
 
   mostRecentOrders: () => db.any('SELECT id, order_date FROM orders ORDER BY id DESC LIMIT 10'),
 
-  lastShopperName: () => db.one('SELECT name from shoppers WHERE id = (SELECT shopper_id FROM orders ORDER BY id DESC LIMIT 1)'),
+  lastShopperName: () => db.one('SELECT name FROM shoppers WHERE id = (SELECT shopper_id FROM orders ORDER BY id DESC LIMIT 1)'),
 
-  orderTotal: (id) => db.any('SELECT SUM (items.price) from orderdetails INNER JOIN items ON orderdetails.item_id=items.id WHERE order_id = $1')
+  orderTotal: (id) => db.any('SELECT SUM (items.price) FROM orderdetails INNER JOIN items ON orderdetails.item_id=items.id WHERE order_id = $1')
 }
 
 module.exports = queries
