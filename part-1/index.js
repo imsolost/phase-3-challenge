@@ -3,7 +3,6 @@ const bodyParser = require('body-parser')
 
 const app = express()
 app.use( bodyParser.json() )
-app.use( bodyParser.urlencoded({ extended: true }))
 
 app.get('/api/supported-operations', (req, res) => {
   res.send({"/": "division",
@@ -19,7 +18,7 @@ app.get('/api/square', (req, res) => {
 
 app.post('/api/compute', (req, res) => {
   const operator = req.body.operator
-  const operands = (req.body.operands).replace(/[\[\]']+/g,'').split(',')
+  const operands = req.body.operands
 
   if (operator === '-') {
     res.send({"result": operands[0] - operands[1]})
@@ -31,14 +30,12 @@ app.post('/api/compute', (req, res) => {
     res.send({"result": operands[0] / operands[1]})
   }
   if (operator === '+') {
-    res.send({"result": parseInt(operands[0]) + parseInt(operands[1]) })
+    res.send({"result": operands[0] + operands[1]})
   }
   else {
     res.status(404).send({"error": `invalid operator ${operator}. Valid operators are /, +, -, *`})
   }
-
 })
-
 
 app.listen( 3000, () => {
   console.log('API is listening on port 3000!')
