@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const queries = require('./database')
-const pgp = require('pg-promise')()
+// const pgp = require('pg-promise')()
 
 describe('queries', () => {
   describe('allItems', () => {
@@ -41,7 +41,7 @@ describe('queries', () => {
       return queries.countItemsInSection('packaged')
         .then( function(data) {
           expect(parseInt(data.count)).to.eql(5)
-          pgp.end()
+          // pgp.end()
       })
     })
   })

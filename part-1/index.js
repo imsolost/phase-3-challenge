@@ -7,7 +7,7 @@ app.use( bodyParser.json() )
 app.get('/api/supported-operations', (req, res) => {
   res.send({"/": "division",
            "+": "addition",
-           "-": "subtration",
+           "-": "subtraction",
            "*": "multiplication"})
 })
 

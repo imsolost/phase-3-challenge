@@ -7,7 +7,7 @@ const queries = {
 
   itemsInSection: section => db.any('SELECT id, name FROM items WHERE section = $1', [section]),
 
-  cheapItems: () => db.any('SELECT id, name, price FROM items WHERE price < 10 ORDER BY price ASC', []),
+  cheapItems: () => db.any('SELECT id, name, price FROM items WHERE price < 10 ORDER BY price ASC'),
 
   countItemsInSection: section => db.one('SELECT COUNT (section) FROM items WHERE section = $1', [section]),
 
@@ -15,7 +15,12 @@ const queries = {
 
   lastShopperName: () => db.one('SELECT name FROM shoppers WHERE id = (SELECT shopper_id FROM orders ORDER BY id DESC LIMIT 1)'),
 
-  orderTotal: (id) => db.any('SELECT SUM (items.price) FROM orderdetails INNER JOIN items ON orderdetails.item_id=items.id WHERE order_id = $1')
+  orderTotal: (id) => db.any('SELECT SUM (items.price) FROM orderdetails INNER JOIN items ON orderdetails.item_id=items.id WHERE order_id = $1', [id])
 }
 
 module.exports = queries
+
+// queries.lastShopperName().then( data => {
+//   console.log( data.name )
+//   pgp.end()
+// })
