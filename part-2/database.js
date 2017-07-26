@@ -19,8 +19,3 @@ const queries = {
 }
 
 module.exports = queries
-
-// queries.allItems().then( data => {
-//   console.log(data)
-//   pgp.end()
-// })

@@ -2,9 +2,9 @@ const { expect } = require('chai')
 const queries = require('./database')
 const pgp = require('pg-promise')()
 
-describe('queries', function(){
+describe('queries', () => {
   describe('allItems', () => {
-    it('retreives all items from the database', function() {
+    it('retreives all items from the database', () => {
       return queries.allItems()
         .then( function(data) {
           expect(data).to.be.an('array')
@@ -14,7 +14,7 @@ describe('queries', function(){
   })
 
   describe('itemsInSection', () => {
-    it('retreives all items from the indicated section', function() {
+    it('retreives all items from the indicated section', () => {
       return queries.itemsInSection('bulk')
         .then( function(data) {
           expect(data).to.be.an('array')
@@ -26,7 +26,7 @@ describe('queries', function(){
   })
 
   describe('cheapItems', () => {
-    it('retreives all items less than $10', function() {
+    it('retreives all items less than $10', () => {
       return queries.cheapItems()
         .then( function(data) {
           expect(data).to.be.an('array')
@@ -37,7 +37,7 @@ describe('queries', function(){
   })
 
   describe('countItemsInSection', () => {
-    it('retreives number of items in specified section', function() {
+    it('retreives number of items in specified section', () => {
       return queries.countItemsInSection('packaged')
         .then( function(data) {
           expect(parseInt(data.count)).to.eql(5)
