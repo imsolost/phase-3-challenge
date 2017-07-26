@@ -19,6 +19,7 @@ const queries = {
 
   orderTotal: (id) => db.any('SELECT SUM (items.price) from orderdetails INNER JOIN items ON orderdetails.item_id=items.id WHERE order_id = $1')
 }
+
 module.exports = queries
 
 // queries.allItems().then( data => {

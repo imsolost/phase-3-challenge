@@ -34,7 +34,7 @@ app.post('/api/compute', (req, res) => {
     res.send({"result": parseInt(operands[0]) + parseInt(operands[1]) })
   }
   else {
-    res.status(404).send({"error": "invalid operator ?. Valid operators are /, +, -, *"})
+    res.status(404).send({"error": `invalid operator ${operator}. Valid operators are /, +, -, *`})
   }
 
 })
